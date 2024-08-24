@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 
 ENV XENON_BCORE=j4
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
                           gcc \
                           make \
@@ -33,8 +33,8 @@ WORKDIR /tmp/libxenon/toolchain
 RUN ./build-xenon-toolchain toolchain - set PARALLEL=${XENON_BCORE}
 
 #Add paths to it
-ENV DEVKITXENON /usr/local/xenon
-ENV PATH $DEVKITXENON/bin:$DEVKITXENON/usr/bin:$PATH
+ENV DEVKITXENON=/usr/local/xenon
+ENV PATH=$DEVKITXENON/bin:$DEVKITXENON/usr/bin:$PATH
 
 #Build and install libxenon
 RUN ./build-xenon-toolchain libxenon - set PARALLEL=${XENON_BCORE}
